@@ -1,4 +1,5 @@
 import asyncio
+import json
 import random
 from itertools import cycle
 
@@ -14,8 +15,8 @@ from datetime import datetime, timedelta
 from tzlocal import get_localzone
 import time as time_module
 
-from bot.utils import logger
-from bot.exceptions import InvalidSession
+from loguru import logger
+from notpixel.bot.exceptions import InvalidSession
 from .headers import headers
 from random import randint
 
@@ -85,9 +86,13 @@ class Tapper:
         return randint(1, 1000000)
 
     def get_cor(self, session: requests.Session):
-        res = session.get("https://raw.githubusercontent.com/vanhbakaa/notpixel-3x-points/refs/heads/main/data4.json")
-        if res.status_code == 200:
-            cor = res.json()
+        with open("./notpixel/data4.json", "r", encoding="utf-8") as f:
+            cor = json.load(f)
+
+        # res = session.get("https://raw.githubusercontent.com/vanhbakaa/notpixel-3x-points/refs/heads/main/data4.json")
+        # if res.status_code == 200:
+        #     cor = res.json()
+        if cor:
             paint = random.choice(cor['data'])
             color = paint['color']
             random_cor = random.choice(paint['cordinates'])
@@ -299,7 +304,7 @@ class Tapper:
 
             except Exception as error:
                 logger.error(f"{self.session_name} | Unknown error: {error}")
-                await asyncio.sleep(delay=randint(60, 120))
+                await asyncio.sleep(delay=randint(1, 6))
 
 
 async def run_query_tapper(query: str, name: str, proxy: str | None):
@@ -307,7 +312,7 @@ async def run_query_tapper(query: str, name: str, proxy: str | None):
         sleep_ = randint(1, 15)
         logger.info(f" start after {sleep_}s")
         # await asyncio.sleep(sleep_)
-        await Tapper(query=query, session_name=name, multi_thread=True).run(proxy=proxy)
+        await Tapper(query=query, session_name=name, multi_thread=False).run(proxy=proxy)
     except InvalidSession:
         logger.error(f"Invalid Query: {query}")
 

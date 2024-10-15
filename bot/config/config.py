@@ -4,18 +4,18 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_ignore_empty=True)
 
-    API_ID: int
-    API_HASH: str
+    # API_ID: int
+    # API_HASH: str
 
 
-    REF_LINK: str = "https://t.me/notpixel/app?startapp=f6624523270"
+    REF_LINK: str = "https://t.me/notpixel/app?startapp=f1992525177_s575409"
     X3POINTS: bool = True
     AUTO_UPGRADE_PAINT_REWARD: bool = True
     AUTO_UPGRADE_RECHARGE_SPEED:bool = True
     AUTO_UPGRADE_RECHARGE_ENERGY:bool = True
     AUTO_TASK: bool = True
 
-    NIGHT_MODE: bool = True
+    NIGHT_MODE: bool = False
     SLEEP_TIME: list[int] = [0, 7] # your time zone
 
     DELAY_EACH_ACCOUNT: list[int] = [10,15]
