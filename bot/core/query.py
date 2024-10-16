@@ -13,8 +13,8 @@ from datetime import datetime, timedelta
 from tzlocal import get_localzone
 import time as time_module
 
-from notpixel.bot.core.utils.logger import logger
-from notpixel.bot.exceptions import InvalidSession
+from bot.utils import logger
+from bot.exceptions import InvalidSession
 from .headers import headers
 from random import randint
 import os
