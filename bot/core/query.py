@@ -1,5 +1,4 @@
 import asyncio
-import json
 import random
 from itertools import cycle
 
@@ -14,7 +13,7 @@ from datetime import datetime, timedelta
 from tzlocal import get_localzone
 import time as time_module
 
-from loguru import logger
+from notpixel.bot.core.utils.logger import logger
 from notpixel.bot.exceptions import InvalidSession
 from .headers import headers
 from random import randint
@@ -62,7 +61,7 @@ class Tapper:
             'image': None
         }
         self.template_id = None
-        self.cache = os.path.join(os.getcwd(), "cache")
+        self.cache = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "cache")
 
     async def check_proxy(self, http_client: aiohttp.ClientSession, proxy: Proxy):
         try:
