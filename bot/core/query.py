@@ -151,7 +151,7 @@ class Tapper:
             logger.success(
                 f"{self.session_name} | <green>Successfully claimed <cyan>{res.json()['claimed']} px</cyan> from mining!</green>")
         else:
-            logger.warning(f"{self.session_name} | <yellow>Failed to claim px from mining: {res.json()}</yellow>")
+            logger.warning(f"{self.session_name} | <yellow>Failed to claim px from mining: {res.text}</yellow>")
 
     async def subscribe_template(self, session: requests.Session, template_id: int):
         for attempt in range(3):
