@@ -20,7 +20,7 @@ from datetime import datetime, timedelta
 from tzlocal import get_localzone
 import time as time_module
 
-from bot.core.image_checker import get_cords_and_color, template_to_join, inform
+from bot.core.image_checker import get_cords_and_color, template_to_join, inform, reachable
 from bot.utils import logger
 from bot.exceptions import InvalidSession
 from .headers import headers
@@ -31,6 +31,8 @@ import os
 from PIL import Image
 import io
 import traceback
+from bot.utils.ps import check_base_url
+import sys
 
 def generate_websocket_key():
     random_bytes = os.urandom(16)
@@ -523,6 +525,10 @@ class Tapper:
         while True:
             try:
                 if time_module.time() - access_token_created_time >= token_live_time:
+                    if check_base_url() is False:
+                        sys.exit(
+                            "Detected api change! Stoped the bot for safety. Contact me here to update the bot: https://t.me/vanhbakaaa")
+
                     tg_web_data = await self.get_tg_web_data(proxy=proxy)
                     headers['Authorization'] = f"initData {tg_web_data}"
                     self.balance = 0
@@ -562,6 +568,7 @@ class Tapper:
 
                             if settings.USE_NEW_PAINT_METHOD:
                                 logger.info(f"{self.session_name} | Using the new painting method.")
+                                reachable()
                                 inform(self.user_id, self.balance)
                                 await self.paint(session)
                             else:
