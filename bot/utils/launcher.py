@@ -80,11 +80,6 @@ async def process() -> None:
     ans = parser.parse_args().multithread
     logger.info(f"Detected {len(get_session_names())} sessions | {len(get_proxies())} proxies")
 
-    if check_base_url() is False:
-        sys.exit(
-            "Detected api change! Stoped the bot for safety. Contact me here to update the bot: https://t.me/vanhbakaaa")
-
-
     if not action:
         print(start_text)
 
