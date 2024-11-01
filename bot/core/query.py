@@ -431,7 +431,7 @@ class Tapper:
             await asyncio.sleep(random.randint(2, 5))
 
     async def get_image(self, session, url, image_headers):
-        image_filename = os.path.join(self.cache, url.split("/")[-1])
+        image_filename = os.path.join(os.path.dirname(__file__), "..", "..", self.cache, url.split("/")[-1])
 
         try:
             if os.path.exists(image_filename):
