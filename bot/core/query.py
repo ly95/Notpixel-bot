@@ -61,7 +61,7 @@ class Tapper:
         }
         self.template_id = None
         self.can_run = True
-        self.cache = os.path.join(os.getcwd(), "cache")
+        self.cache = os.path.join(os.path.dirname(__file__), '..', '..', "cache")
 
         self.max_lvl = {
             "energyLimit": 7,
