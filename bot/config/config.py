@@ -11,8 +11,8 @@ class Settings(BaseSettings):
     REF_LINK: str = "https://t.me/notpixel/app?startapp=f6624523270"
     X3POINTS: bool = True
     AUTO_UPGRADE_PAINT_REWARD: bool = True
-    AUTO_UPGRADE_RECHARGE_SPEED:bool = True
-    AUTO_UPGRADE_RECHARGE_ENERGY:bool = True
+    AUTO_UPGRADE_RECHARGE_SPEED:bool = False
+    AUTO_UPGRADE_RECHARGE_ENERGY:bool = False
     AUTO_TASK: bool = True
 
     USE_PUMPKIN_BOMBS: bool = True
