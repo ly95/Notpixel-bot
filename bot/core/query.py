@@ -176,7 +176,7 @@ class Tapper:
             self.balance += res.json()['claimed']
 
         else:
-            logger.warning(f"{self.session_name} | Failed to claim px from mining: {res.json()}")
+            logger.warning(f"{self.session_name} | Failed to claim px from mining: {res.text}")
 
     async def subscribe_template(self, session, template_id: int):
         for attempt in range(3):
