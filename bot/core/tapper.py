@@ -131,6 +131,10 @@ class Tapper:
                 except FloodWait as fl:
 
                     logger.warning(f"<light-yellow>{self.session_name}</light-yellow> | FloodWait {fl}")
+                    async for dialog in self.tg_client.get_dialogs():
+                        if dialog.chat and dialog.chat.username and dialog.chat.username == "notpixel":
+                            break
+
             web_view = await self.tg_client.invoke(RequestAppWebView(
                 peer=peer,
                 app=InputBotAppShortName(bot_id=peer, short_name="app"),
@@ -722,6 +726,11 @@ class Tapper:
                             if settings.AUTO_TASK:
                                 user_data = self.get_user_data(session)
                                 self.completed_task = list(user_data['tasks'].keys())
+                                if "nikolai" not in self.completed_task:
+                                    res = session.get(f"{API_GAME_ENDPOINT}/mining/task/check/nikolai", headers=headers)
+                                    if res.status_code == 200 and res.json()['nikolai']:
+                                        logger.success(
+                                            f"{self.session_name} | <green>Successfully complete task <cyan>nikolai</cyan>!</green>")
                                 if "pumpkin" not in self.completed_task :
                                     res = session.get(f"{API_GAME_ENDPOINT}/mining/task/check/pumpkin", headers=headers)
                                     if res.status_code == 200 and res.json()['pumpkin']:
