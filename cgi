@@ -1,1 +1,1 @@
-index-FWzeWigJ.js
+stoped for safety 
